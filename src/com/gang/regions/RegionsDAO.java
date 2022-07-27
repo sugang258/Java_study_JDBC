@@ -11,7 +11,6 @@ import com.gang.util.DBConnector;
 public class RegionsDAO {
 	
 	//2. Regions에서 하나의 결과(row)
-	@SuppressWarnings("null")
 	public RegionsDTO getDetail(int region_id) throws Exception {
 		RegionsDTO regionsDTO = new RegionsDTO();
 		//regionsDTO = null;
