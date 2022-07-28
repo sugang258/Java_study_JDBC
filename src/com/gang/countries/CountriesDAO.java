@@ -11,19 +11,49 @@ import com.gang.util.DBConnector;
 
 public class CountriesDAO {
 	
-	public CountriesDTO getDetail(String country_id) throws Exception {
+	//setCountry
+	public int setCountry(CountriesDTO countriesDTO) throws Exception{
+		//1. DB 연결
+				Connection con = DBConnector.getConnection();
+				
+				//2. Query문 작성
+				String sql = "INSERT INTO COUNTRIES VALUES(?,?,?)";
+				
+				//3. Query 문 미리 전송
+				PreparedStatement st = con.prepareStatement(sql);
+				
+				//4. ? 값 세팅
+				st.setString(1, countriesDTO.getCountry_ID());
+				st.setString(2, countriesDTO.getCountry_Name());
+				st.setInt(3, countriesDTO.getRegions_ID());
+			
+				
+				//5. 최종 전송 후 결과를 처리
+				int result = st.executeUpdate();
+				
+				//6. 자원해제
+				DBConnector.disConnect( st, con);
+				
+				return result;
+	}
+	
+	public CountriesDTO getDetail(String search) throws Exception {
 		CountriesDTO countriesDTO = new CountriesDTO();
 		//1. DB 연결
 		Connection con = DBConnector.getConnection();
 		
 		//2. Query문 작성
 		String sql = "SELECT * FROM COUNTRIES WHERE COUNTRY_ID=?";
+		String sql2 = "SELECT * FROM COUNTRIES WHERE COUNTRY_NAME LIKE '%'a'%'";
+		String sql3 = "SELECT * FROM COUNTRIES WHERE COUNTRY_NAME LIKE '%'||?||'%'";
+
 		
 		//3. Query 문 미리 전송
 		PreparedStatement st = con.prepareStatement(sql);
 		
 		//4. ? 값 세팅
-		st.setString(1, country_id);
+		//st.setString(1, country_id);
+		st.setString(1, "%"+search+"%");
 	
 		
 		//5. 최종 전송 후 결과를 처리

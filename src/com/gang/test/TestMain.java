@@ -24,21 +24,47 @@ public class TestMain {
 		CountriesDAO countriesDAO = new CountriesDAO();
 		RegionsView regionsView = new RegionsView();
 		CountriesView countriesView = new CountriesView();
-		/*
+		
 		ArrayList<RegionsDTO> ar = regionsDAO.getList();
-		System.out.println("==============");
-		ArrayList<CountriesDTO> ar2 = countriesDAO.getList();
-		RegionsDTO regionsDTO = regionsDAO.getDetail(1);
-		regionsView.view(regionsDTO);
-		CountriesDTO countriesDTO = countriesDAO.getDetail("AU");
-		countriesView.view(countriesDTO);
+		//System.out.println("==============");
+		//ArrayList<CountriesDTO> ar2 = countriesDAO.getList();
+		//RegionsDTO regionsDTO = regionsDAO.getDetail(1);
+		//RegionsDTO regionsDTO = new RegionsDTO();
+		//regionsView.view(regionsDTO);
+		//CountriesDTO countriesDTO = countriesDAO.getDetail("AU");
+		//countriesView.view(countriesDTO);
 		regionsView.view(ar);
-		countriesView.view(ar2);
+		//countriesView.view(ar2);
+		
+		//EmployeesDTO employeesDTO = employeesDAO.getDetail(137);
+		//employeesView.view(employeesDTO);
+		//ArrayList<EmployeesDTO> ar3 = employeesDAO.getList();
+		//employeesView.view(ar3);
+		/*
+		RegionsDTO regionsDTO = new RegionsDTO();
+		regionsDTO.setRegion_id(6);
+		regionsDTO.setRegion_name("Mars");
+		int result = regionsDAO.setRegion(regionsDTO);
+		
+		if(result > 0) {
+			System.out.println("성공");
+		}else {
+			System.out.println("실패");
+		}
 		*/
-		EmployeesDTO employeesDTO = employeesDAO.getDetail(137);
-		employeesView.view(employeesDTO);
-		ArrayList<EmployeesDTO> ar3 = employeesDAO.getList();
-		employeesView.view(ar3);
+		
+		CountriesDTO countriesDTO = new CountriesDTO();
+		countriesDTO.setCountry_ID("SJ");
+		countriesDTO.setCountry_Name("SUGANG");
+		countriesDTO.setRegions_ID(5);
+		int result2 = countriesDAO.setCountry(countriesDTO);
+		
+		if (result2 > 0) {
+			System.out.println("성공");
+			
+		}else {
+			System.out.println("실패");
+		}
 		
 		
 		

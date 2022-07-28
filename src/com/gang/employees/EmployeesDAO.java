@@ -10,6 +10,35 @@ import com.gang.util.DBConnector;
 
 public class EmployeesDAO {
 	
+	public void getSalaryInfo() throws Exception {
+		//1. DB 연결
+		Connection con = DBConnector.getConnection();
+		
+		//2. QUERY문 작성
+		String sql = "SELECT SUM(SALARY), AVG(SALARY), MAX(SALARY) AS MAX FROM EMPLOYEES";
+		
+		//3. QUERY 문 미리 전송
+		PreparedStatement st = con.prepareStatement(sql);
+		
+		//4. ? 값 세팅 
+		
+		
+		//5. 최종 전송 후 결과를 처리
+		ResultSet rs = st.executeQuery();
+		
+		if(rs.next()) {
+			int sum = rs.getInt("SUM(SALARY)");
+			double avg = rs.getLong(2);
+			int max = rs.getInt("MAX");
+			System.out.println(sum);
+			System.out.println(avg);
+			System.out.println(max);
+		}
+		
+		//6. 자원해제
+		DBConnector.disConnect(rs, st, con);
+	}
+	
 	public ArrayList<EmployeesDTO> getList() throws Exception {
 		ArrayList<EmployeesDTO> ar = new ArrayList();
 		//1. DB 연결
@@ -24,7 +53,7 @@ public class EmployeesDAO {
 		//4.
 		
 		//5. 최종 전송 후 결과를 처리
-		ResultSet rs = st.executeQuery(sql);
+		ResultSet rs = st.executeQuery();
 		
 		while(rs.next()) {
 			EmployeesDTO employeesDTO = new EmployeesDTO();
