@@ -54,9 +54,9 @@ public class TestMain {
 		*/
 		
 		CountriesDTO countriesDTO = new CountriesDTO();
-		countriesDTO.setCountry_ID("SJ");
-		countriesDTO.setCountry_Name("SUGANG");
-		countriesDTO.setRegions_ID(5);
+		countriesDTO.setCountry_ID("YA");
+		countriesDTO.setCountry_Name("ZIPZUOHAE");
+		countriesDTO.setRegions_ID(7);
 		int result2 = countriesDAO.setCountry(countriesDTO);
 		
 		if (result2 > 0) {
