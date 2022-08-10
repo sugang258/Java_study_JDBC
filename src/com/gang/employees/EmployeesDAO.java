@@ -5,10 +5,39 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
+import com.gang.departments.DepartmentsDTO;
 import com.gang.regions.RegionsDTO;
 import com.gang.util.DBConnector;
 
 public class EmployeesDAO {
+	
+	public void getJoinTest(EmployeesDTO employeesDTO) throws Exception{
+		Connection con = DBConnector.getConnection();
+		
+		String sql = "SELECT E.LAST_NAME, E.SALARY, D.DEPARTMENT_NAME "
+				+ "FROM EMPLOYEES E "
+				+ "		INNER JOIN "
+				+ "		DEPARTMENTS D "
+				+ "		ON E.DEPARTMENT_ID = D.DEPARTMENT_ID "
+				+ "WHERE E.EMPLOYEE_ID = ? ";
+		
+		PreparedStatement st = con.prepareStatement(sql);
+		
+		st.setInt(1, employeesDTO.getEmployee_ID());
+		
+		ResultSet rs = st.executeQuery();
+		
+		if(rs.next()) {
+			employeesDTO = new EmployeesDTO();
+			employeesDTO.setLast_Name(rs.getString("LAST_NAME"));
+			employeesDTO.setSalary(rs.getInt("SALARY"));
+			DepartmentsDTO dt = new DepartmentsDTO();
+			dt.setDepartment_NAME(rs.getString("DEPARTMENT_NAME"));
+		}
+		
+		DBConnector.disConnect(rs, st, con);
+	}
+	
 	
 	public void getSalaryInfo() throws Exception {
 		//1. DB 연결
